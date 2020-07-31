@@ -16,7 +16,6 @@ var factorial = function(n) {
   return (n === 1) ? 1 : n * factorial(n - 1);
 };
 
-
 // 2. Compute the sum of an array of integers.
 // sum([1,2,3,4,5,6]); // 21
 var sum = function(array) {
@@ -37,6 +36,8 @@ var arraySum = function(array) {
 
 // 4. Check if a number is even.
 var isEven = function(n) {
+  n = Math.abs(n);
+  return (n === 0 || n === 1) ? (n === 0) : isEven(n - 2);
 };
 
 // 5. Sum all integers below a given integer.
