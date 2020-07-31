@@ -29,7 +29,7 @@ var sum = function(array) {
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
-  var arr = array.flat(4);
+  var arr = flatten(array);
   var n = arr.pop();
 
   return (n === undefined) ? 0 : (n + arraySum(arr));
@@ -201,18 +201,16 @@ var nestedEvenSum = function(obj) {
 // 30. Flatten an array containing nested arrays.
 // flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
 var flatten = function(array) {
-  // var results = [];
-  // var arr = array.slice();
-  // arr.forEach( ele => {
-  //   var r = Array.isArray(ele) ? flatten(ele) : ele;
-  //   results.concat( r );
-  //   debugger 
-  // });
-  // console.log(results)
-  // return results;
+  var results = [];
+  var arr = array.slice();
+
+  arr.forEach( ele => {
+    ele = Array.isArray(ele) ? flatten(ele) : ele;
+    results = results.concat( ele );
+  });
+  return results;
 };
 
-// 31. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {p:1, o:2, t:2, a:1}
 var letterTally = function(str, obj) {
 };
