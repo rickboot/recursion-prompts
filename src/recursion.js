@@ -44,6 +44,14 @@ var isEven = function(n) {
 // sumBelow(10); // 45
 // sumBelow(7); // 21
 var sumBelow = function(n) {
+  if (n === 0) {
+    return n;
+  }
+  //  if positive decrement to 0 else increment 
+  var n = (n > 0) ? --n : ++n;
+  var sum = n;
+  sum += sumBelow(n);
+  return sum; 
 };
 
 // 6. Get the integers within a range (x, y).
@@ -55,7 +63,7 @@ var range = function(x, y) {
   if (Math.abs(x - y) < 2) {
     return results;
   } 
-  // increment if x is less else decrement
+  // if x < y count up else decrement
   var x = (x <= y) ? ++x : --x;
   results = results.concat(x, range(x, y));
 
