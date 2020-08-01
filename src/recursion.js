@@ -76,6 +76,34 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+
+  if (exp === 0) {
+    return 1;
+  }
+  
+  // created to workaround JS decimal precision errors on negative exp
+  // see comments at bottom 
+  var positiveExponent = function(base, exp) {
+    var product = base;
+    return product *= exponent(base, --exp);
+  };
+
+  if (exp > 0) {
+    return positiveExponent(base, exp);
+  } else {
+    return (1 / positiveExponent(base, -exp));
+  }
+
+  // JS math error prevents the solution below 
+  //
+  // if (exp > 0) {
+  //   var product = base;
+  //   return product *= exponent(base, --exp);
+  // } else {
+  //   var product = 1 / base;
+  //   return product *= exponent(base, ++exp);
+  // }
+  // expect(exponent(5,-4)).to.equal(0.0016);  math error = 0.001600000002
 };
 
 // 8. Determine if a number is a power of two.
