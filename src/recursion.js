@@ -49,6 +49,17 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  var results = [];
+
+  // confirm valid range between x and y
+  if (Math.abs(x - y) < 2) {
+    return results;
+  } 
+  // increment if x is less else decrement
+  var x = (x <= y) ? ++x : --x;
+  results = results.concat(x, range(x, y));
+
+  return results;
 };
 
 // 7. Compute the exponent of a number.
