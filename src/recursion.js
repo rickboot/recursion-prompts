@@ -205,7 +205,28 @@ var multiply = function(x, y) {
 
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
+
+// answer is count of times that y can be subtracted from x
+
+// if ((x > 0 && y < 0) || (x < 0 && y < 0)) {
+//   x = -x;
+//   y = -y;
+// }
+// y = (y < 0) ? -y : y;
 var divide = function(x, y) {
+  if (y === 0) {
+    return NaN;
+  }
+  if ((x === 0) || (x < y)) {
+    return 0;
+  } 
+  var counter = 1;
+  if ((x > 0 && y < 0) || (x < 0 && y > 0)) {
+    x = (x < 0) ? -x : x; 
+    y = (y < 0) ? -y : y; 
+    var counter = -1;  
+  }
+  return counter + divide(x - y, y);
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
