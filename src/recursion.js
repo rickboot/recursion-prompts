@@ -183,7 +183,24 @@ var modulo = function(x, y) {
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
+
+// to ensure that product is the correct sign
+// x y      x y signs needed for recursive addition
+// - - = +  make + +
+// + + = +  OK 
+// - + = -  OK 
+// + - = -  make - +
+
 var multiply = function(x, y) {
+  if (y === 0 || x === 0) {
+    return 0;
+  }
+  if ((x > 0 && y < 0) || (x < 0 && y < 0)) {
+    x = -x;
+    y = -y;
+  }
+  y = (y < 0) ? -y : y;
+  return x + multiply(x, --y);
 };
 
 // 13. Write a function that divides two numbers without using the / operator or
