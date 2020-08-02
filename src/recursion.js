@@ -150,7 +150,7 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 
-// checking for Math, /, *... limits comments and abs values and required workarounds
+// checking for Math, /, *... limits comments and abs values and required worka
 var modulo = function(x, y) {
   if (y === 0) {
     return NaN;
@@ -159,13 +159,21 @@ var modulo = function(x, y) {
     return 0;
   }
 
-  var absX = (x < 0) ? (x - x - x) : x;
-  var absY = (y < 0) ? (y - y - y) : y;
+  var abs = function (n) {
+    return n = (n < 0) ? -n : n;
+  };
+
+  var areSameSign = function (m, n) {
+    return (m >= 0 && n > 0) || (m < 0 && n < 0);
+  };
+
+  var absX = abs(x);
+  var absY = abs(y);
   
   if (absY > absX) {
     return x;
   } else {
-    if ( (x > 0 && y > 0) || (x < 0 && y < 0) ) {
+    if ( areSameSign(x, y) ) {
       return modulo(x - y, y);
     } else {
       return modulo(x + y, y);
