@@ -149,7 +149,28 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+
+// checking for Math, /, *... limits comments and abs values and required workarounds
 var modulo = function(x, y) {
+  if (y === 0) {
+    return NaN;
+  }
+  if (y === 1) {
+    return 0;
+  }
+
+  var absX = (x < 0) ? (x - x - x) : x;
+  var absY = (y < 0) ? (y - y - y) : y;
+  
+  if (absY > absX) {
+    return x;
+  } else {
+    if ( (x > 0 && y > 0) || (x < 0 && y < 0) ) {
+      return modulo(x - y, y);
+    } else {
+      return modulo(x + y, y);
+    }
+  }
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
