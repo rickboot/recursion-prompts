@@ -220,13 +220,13 @@ var divide = function(x, y) {
   if ((x === 0) || (x < y)) {
     return 0;
   } 
-  var counter = 1;
+  var count = 1;
   if ((x > 0 && y < 0) || (x < 0 && y > 0)) {
     x = (x < 0) ? -x : x; 
     y = (y < 0) ? -y : y; 
-    var counter = -1;  
+    var count = -1;  
   }
-  return counter + divide(x - y, y);
+  return count + divide(x - y, y);
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
@@ -235,6 +235,18 @@ var divide = function(x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
+  // test requires that negative numbers return null  
+  if (x < 0 || y < 0) { return null; }
+  // ensure x is greater than y
+  if (x < y) { [x, y] = [y, x]; }
+
+  var r = x % y;
+
+  if (r === 0) {
+    return y;
+  } else {
+    return gcd(y, r);
+  }
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
@@ -242,6 +254,19 @@ var gcd = function(x, y) {
 // compareStr('house', 'houses') // false
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+
+  // base case: string.length === 0 || chars don't match
+  // check length at beginning...
+
+  if (str1.length === 0 && str2.length === 0) {
+    return true;
+  } 
+
+  if (str1[0] !== str2[0] ) {
+    return false;
+  } else {
+    return compareStr(str1.slice(1), str2.slice(1));
+  }
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
