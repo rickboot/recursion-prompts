@@ -47,11 +47,11 @@ var sumBelow = function(n) {
   if (n === 0) {
     return n;
   }
-  //  if positive decrement to 0 else increment 
+  //  if positive decrement to 0 else increment
   var n = (n > 0) ? --n : ++n;
   var sum = n;
   sum += sumBelow(n);
-  return sum; 
+  return sum;
 };
 
 // 6. Get the integers within a range (x, y).
@@ -62,7 +62,7 @@ var range = function(x, y) {
   // confirm valid range between x and y
   if (Math.abs(x - y) < 2) {
     return results;
-  } 
+  }
   // if x < y count up else decrement
   var x = (x <= y) ? ++x : --x;
   results = results.concat(x, range(x, y));
@@ -80,9 +80,9 @@ var exponent = function(base, exp) {
   if (exp === 0) {
     return 1;
   }
-  
+
   // created to workaround JS decimal precision errors on negative exp
-  // see comments at bottom 
+  // see comments at bottom
   var positiveExponent = function(base, exp) {
     var product = base;
     return product *= exponent(base, --exp);
@@ -94,7 +94,7 @@ var exponent = function(base, exp) {
     return (1 / positiveExponent(base, -exp));
   }
 
-  // JS math error prevents the solution below 
+  // JS math error prevents the solution below
   //
   // if (exp > 0) {
   //   var product = base;
@@ -113,10 +113,10 @@ var exponent = function(base, exp) {
 var powerOfTwo = function(n) {
   if ( (!isEven(n) && n !== 1) || n < 1) {
     return false;
-  } 
+  }
   if (n === 1) {
     return true;
-  } 
+  }
   return powerOfTwo(n / 2);
 };
 
@@ -137,7 +137,7 @@ var palindrome = function(string) {
   var str = string.toLowerCase();
   var first = str[0];
   var last = str[str.length - 1];
-  
+
   if (str.length < 2) {
     return true;
   }
@@ -169,7 +169,7 @@ var modulo = function(x, y) {
 
   var absX = abs(x);
   var absY = abs(y);
-  
+
   if (absY > absX) {
     return x;
   } else {
@@ -187,8 +187,8 @@ var modulo = function(x, y) {
 // to ensure that product is the correct sign
 // x y      x y signs needed for recursive addition
 // - - = +  make + +
-// + + = +  OK 
-// - + = -  OK 
+// + + = +  OK
+// - + = -  OK
 // + - = -  make - +
 
 var multiply = function(x, y) {
@@ -219,12 +219,12 @@ var divide = function(x, y) {
   }
   if ((x === 0) || (x < y)) {
     return 0;
-  } 
+  }
   var count = 1;
   if ((x > 0 && y < 0) || (x < 0 && y > 0)) {
-    x = (x < 0) ? -x : x; 
-    y = (y < 0) ? -y : y; 
-    var count = -1;  
+    x = (x < 0) ? -x : x;
+    y = (y < 0) ? -y : y;
+    var count = -1;
   }
   return count + divide(x - y, y);
 };
@@ -235,7 +235,7 @@ var divide = function(x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
-  // test requires that negative numbers return null  
+  // test requires that negative numbers return null
   if (x < 0 || y < 0) { return null; }
   // ensure x is greater than y
   if (x < y) { [x, y] = [y, x]; }
@@ -260,7 +260,7 @@ var compareStr = function(str1, str2) {
 
   if (str1.length === 0 && str2.length === 0) {
     return true;
-  } 
+  }
 
   if (str1[0] !== str2[0] ) {
     return false;
@@ -272,6 +272,13 @@ var compareStr = function(str1, str2) {
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
 var createArray = function(str) {
+  // base: when str is empty
+  var array = [];
+  if (str === '') {
+    return [];
+  }
+  array.push(str.slice(-1));
+  return createArray(str.slice(0, -1)).concat(array);
 };
 
 // 17. Reverse the order of an array
